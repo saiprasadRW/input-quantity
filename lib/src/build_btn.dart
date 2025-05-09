@@ -57,7 +57,7 @@ class BuildBtn extends StatelessWidget {
     bool isSqborder = borderShape == BorderShapeBtn.square;
 
     return GestureDetector(
-      onLongPressStart: (details) => onStart.call(onTap),
+      onLongPressStart: (details) => onTap?.call(),
       onLongPressEnd: (details) => onEndTime.call(),
       onTap: onTap,
       child: DecoratedBox(

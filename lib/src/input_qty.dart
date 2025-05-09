@@ -346,7 +346,7 @@ class _InputQtyState extends State<InputQty> {
         _valCtrl.text = "$temp";
       }
     } else {
-      temp = widget.initVal;
+      temp = widget.minVal;
 
       _valCtrl.text = "$temp";
     }
