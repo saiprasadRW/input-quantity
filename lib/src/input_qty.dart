@@ -540,10 +540,10 @@ class _InputQtyState extends State<InputQty> {
           // !MODIFICATION: Handle empty strings properly
           if (strVal.isEmpty || strVal == '-') {
             // Set to minVal when empty
-            num value = widget.minVal;
-            value = _convertOutputType(value);
-            currentval.value = value;
-            widget.onQtyChanged?.call(value); // Important: Notify of the change
+            // num value = widget.minVal;
+            // value = _convertOutputType(value);
+            // currentval.value = value;
+            // widget.onQtyChanged?.call(value); // Important: Notify of the change
             return;
           }
           num? temp = num.tryParse(strVal);
@@ -556,7 +556,7 @@ class _InputQtyState extends State<InputQty> {
           currentval.value = temp;
           temp = _convertOutputType(temp);
           // !Changes done here
-          widget.onQtyChanged?.call(temp);
+          // widget.onQtyChanged?.call(temp);
         },
         onFieldSubmitted: (_) => checkValue(),
       );
