@@ -537,8 +537,15 @@ class _InputQtyState extends State<InputQty> {
                 TextPosition(offset: _valCtrl.text.length));
             return;
           }
-          // avoid parsing value
-          if (strVal.isEmpty || strVal == '-') return;
+          // !MODIFICATION: Handle empty strings properly
+          if (strVal.isEmpty || strVal == '-') {
+            // Set to minVal when empty
+            num value = widget.minVal;
+            value = _convertOutputType(value);
+            currentval.value = value;
+            widget.onQtyChanged?.call(value); // Important: Notify of the change
+            return;
+          }
           num? temp = num.tryParse(strVal);
           if (temp == null) {
             _valCtrl.text = '${currentval.value}';
@@ -548,6 +555,8 @@ class _InputQtyState extends State<InputQty> {
           }
           currentval.value = temp;
           temp = _convertOutputType(temp);
+          // !Changes done here
+          widget.onQtyChanged?.call(temp);
         },
         onFieldSubmitted: (_) => checkValue(),
       );
@@ -564,9 +573,16 @@ class _InputQtyState extends State<InputQty> {
 
   @override
   Widget build(BuildContext context) {
-    return widget.isIntrinsicWidth
-        ? IntrinsicWidth(child: _buildtextfield())
-        : _buildtextfield();
+    // !Changes done here
+    return Focus(
+        onFocusChange: (focus) {
+          if (!focus) {
+            checkValue();
+          }
+        },
+        child: widget.isIntrinsicWidth
+            ? IntrinsicWidth(child: _buildtextfield())
+            : _buildtextfield());
   }
 
   @override
