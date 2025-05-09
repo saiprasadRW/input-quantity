@@ -24,8 +24,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
 
-flutter:
-  screenshots:
+screenshots:
   - description: "Demo input quantity"
     path: assets/demo_v2.gif
 
